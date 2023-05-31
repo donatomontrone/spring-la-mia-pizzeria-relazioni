@@ -1,5 +1,7 @@
 package org.java.demo.pizzeria.pojo;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.URL;
 
 import jakarta.persistence.Column;
@@ -7,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -38,6 +41,9 @@ public class Pizza {
 	@NotNull(message="Inserisci il prezzo della pizza.")
 	@Max(value=25,message="Il prezzo della pizza non può superare i 25,00€.")
 	private Integer price;
+	
+	@OneToMany(mappedBy = "pizza")
+	private List<Pizza> specialOffers;
 	
 	public Pizza() {}
 
@@ -93,6 +99,9 @@ public class Pizza {
 		return "[" + getId() + "] - " + getName() + " | " + getPrice() + "€"
 			+ "\nDescrizione: " + getDescription();
 	}
+	
+	
+	//Calcolo per la pizza scontata dentro l'offerta speciale.
 	
 	
 }

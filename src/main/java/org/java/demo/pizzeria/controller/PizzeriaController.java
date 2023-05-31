@@ -82,21 +82,20 @@ public class PizzeriaController {
 		
 		return "edit";
 	}
-	
+
 	@PostMapping("/pizzas/edit/{id}")
-	public String update(@PathVariable("id") Integer id,@Valid @ModelAttribute Pizza pizza,
-	        BindingResult bindingResult, Model model) {
-		
-	    if (bindingResult.hasErrors()) {
-	        model.addAttribute("errors", bindingResult);
-	        model.addAttribute("pizza", pizza);
-	        return "edit";
-	    }
+	public String update(@PathVariable("id") Integer id, @Valid @ModelAttribute Pizza pizza,
+			BindingResult bindingResult, Model model) {
 
-	    pizzaService.save(pizza);
-	    return "redirect:/pizzas/{id}";
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("errors", bindingResult);
+			model.addAttribute("pizza", pizza);
+			return "edit";
+		}
+
+		pizzaService.save(pizza);
+		return "redirect:/pizzas/{id}";
 	}
-
 	
 	@GetMapping("/pizzas/delete/{id}")
 	public String delete(@PathVariable("id") Integer id) {
