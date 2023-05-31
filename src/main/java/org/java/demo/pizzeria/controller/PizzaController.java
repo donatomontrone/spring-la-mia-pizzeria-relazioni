@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.java.demo.pizzeria.pojo.Pizza;
+import org.java.demo.pizzeria.pojo.SpecialOffer;
 import org.java.demo.pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
 
 @Controller
-public class PizzeriaController {
+public class PizzaController {
 	@Autowired
 	private PizzaService pizzaService;
 	
@@ -44,9 +45,11 @@ public class PizzeriaController {
 	public String show(Model model, 
 			@PathVariable("id") Integer id) {
 		
-		Optional<Pizza> oPizza = pizzaService.findById(id);
+		Optional<Pizza> oPizza = pizzaService.findByIdwithSpecialOffer(id);
 		Pizza pizza = oPizza.get();
+		List<SpecialOffer> offers = pizza.getSpecialOffers();
 		
+		model.addAttribute("offers", offers);
 		model.addAttribute("pizza", pizza);
 		return "pizza";
 	}
@@ -55,7 +58,7 @@ public class PizzeriaController {
 	public String create(Model model) {
 		
 		model.addAttribute("pizza", new Pizza());
-		return "create";
+		return "create-pizza";
 	}
 	
 	@PostMapping("/pizzas/create")
@@ -64,7 +67,7 @@ public class PizzeriaController {
 		if (bindingResult.hasErrors()) {
 				model.addAttribute("errors", bindingResult);
 				model.addAttribute("pizza", pizza);
-				return "create";
+				return "create-pizza";
 		}
 		
 		pizzaService.save(pizza);
@@ -80,7 +83,7 @@ public class PizzeriaController {
 		Pizza pizza = oPizza.get();
 		model.addAttribute("pizza", pizza);
 		
-		return "edit";
+		return "edit-pizza";
 	}
 
 	@PostMapping("/pizzas/edit/{id}")
@@ -90,7 +93,7 @@ public class PizzeriaController {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("errors", bindingResult);
 			model.addAttribute("pizza", pizza);
-			return "edit";
+			return "edit-pizza";
 		}
 
 		pizzaService.save(pizza);

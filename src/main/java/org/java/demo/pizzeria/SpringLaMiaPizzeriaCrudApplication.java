@@ -1,10 +1,13 @@
 package org.java.demo.pizzeria;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
 import org.java.demo.pizzeria.pojo.Pizza;
+import org.java.demo.pizzeria.pojo.SpecialOffer;
 import org.java.demo.pizzeria.service.PizzaService;
+import org.java.demo.pizzeria.service.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +18,10 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PizzaService pizzaService;
-
+	
+	@Autowired
+	private SpecialOfferService specialOfferService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
 	}
@@ -37,8 +43,34 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 			);
 			for (Pizza pizza : pizzas) {
 				pizzaService.save(pizza);
+				
+				
 			}
-		
+			
+			List<SpecialOffer> specialOffers = Arrays.asList(
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 25%", 25, pizzas.get(0)),	
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 50%", 50, pizzas.get(0)),
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Pizza omaggio", 100, pizzas.get(0)),	
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 10%", 10, pizzas.get(1)),
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 25%", 25, pizzas.get(1)),		
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 20%", 20, pizzas.get(2)),			 
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 30%", 30, pizzas.get(2)),
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 50%", 50, pizzas.get(3)),
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Pizza omaggio", 100, pizzas.get(3)),	
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 10%", 10, pizzas.get(4)),
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 25%", 25, pizzas.get(5)),		
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 20%", 20, pizzas.get(5)),			 
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 30%", 30, pizzas.get(6)),
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Pizza omaggio", 100, pizzas.get(6)),	
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 10%", 10, pizzas.get(7)),
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 25%", 25, pizzas.get(7)),		
+					new SpecialOffer(LocalDate.parse("2024-01-01"),LocalDate.parse("2024-01-09"), "Sconto del 20%", 20, pizzas.get(8))
+					);
+			for (SpecialOffer specialOffer : specialOffers) {
+				specialOfferService.save(specialOffer);
+			
+			}
+			
 	}
 
 }

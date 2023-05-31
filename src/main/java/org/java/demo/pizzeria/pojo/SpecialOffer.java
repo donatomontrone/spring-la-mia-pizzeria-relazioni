@@ -2,6 +2,7 @@ package org.java.demo.pizzeria.pojo;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +15,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Future;
 
-
+@Entity
 public class SpecialOffer {
 	
 	@Id
@@ -40,8 +41,12 @@ public class SpecialOffer {
 	private Pizza pizza;
 	
 	public SpecialOffer() {}
-	public SpecialOffer(LocalDate startDate, LocalDate endDate, String title, Integer discountPerc) {
-		
+	public SpecialOffer(LocalDate startDate, LocalDate endDate, String title, Integer discountPerc, Pizza pizza) {
+		setStartDate(startDate);
+		setEndDate(endDate);
+		setTitle(title);
+		setDiscountPerc(discountPerc);
+		setPizza(pizza);
 	}
 	public Integer getId() {
 		return id;
@@ -59,6 +64,7 @@ public class SpecialOffer {
 		return endDate;
 	}
 	public void setEndDate(LocalDate endDate) {
+		
 		this.endDate = endDate;
 	}
 	public String getTitle() {
@@ -83,6 +89,6 @@ public class SpecialOffer {
 	@Override
 	public String toString() {
 		return "[" +  getId() + "] " + getTitle()
-				+ "\nL'offerta inizia il: " + getStartDate() + " e termina " + getEndDate();
+				+ "\nL'offerta inizia il: " + getStartDate() + " e termina " + getEndDate() + " - Pizza " + getPizza();
 	}
 }
