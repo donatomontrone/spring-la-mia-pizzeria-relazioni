@@ -53,8 +53,8 @@
 							</div>
 							<div class="col-12">
 								<div class="card-footer text-center">
-									<span th:each="offer : ${offers}" th:object="${offer}">
-										<span class="badge rounded-pill text-bg-primary text-white">[[*{title}]] |  <a class="text-white" th:href="@{/special-offers/edit/{id} (id=*{id})}">  <i class="fa-regular fa-pen-to-square"></i></a></span>
+									<span th:each="offer : ${specialOffers}" th:object="${offer}">
+										<span class="badge rounded-pill text-bg-primary text-white">[[*{title}]] |  <a class="text-white" th:href="@{/special-offers/edit/{id} (id=${offer.id})}"><i class="fa-regular fa-pen-to-square"></i></a></span>
 									</span>
 								</div>
 							</div>

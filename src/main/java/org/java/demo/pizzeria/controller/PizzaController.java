@@ -47,9 +47,9 @@ public class PizzaController {
 		
 		Optional<Pizza> oPizza = pizzaService.findByIdwithSpecialOffer(id);
 		Pizza pizza = oPizza.get();
-		List<SpecialOffer> offers = pizza.getSpecialOffers();
+		List<SpecialOffer> specialOffers = pizza.getSpecialOffers();
 		
-		model.addAttribute("offers", offers);
+		model.addAttribute("specialOffers", specialOffers);
 		model.addAttribute("pizza", pizza);
 		return "pizza";
 	}
