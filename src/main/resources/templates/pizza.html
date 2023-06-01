@@ -47,8 +47,12 @@
 									<h4 class="card-title">[[*{name}]]</h4>
 									<p class="card-text">[[*{description}]]</p>
 									<p class="card-text">
-										<small class="text-secondary">[[*{price}]],00 &euro;</small>
+										[[*{price}]],00 &euro;
 									</p>
+									<small class="text-secondary d-block" th:each="offer : ${specialOffers}" th:object="${offer}">
+										<span>[[*{title} + ':']]</span>
+										<span class="fw-semibold"> [[${offer.getDiscount(pizza.price)} + ',00€']]</span>
+									</small>
 								</div>
 							</div>
 							<div class="col-12">
@@ -63,11 +67,11 @@
 					<div class="col-12">
 						<a th:href="@{/}" class="btn btn-sm btn-secondary"><i
 							class="fa-solid fa-arrow-left"></i> Back</a>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</main>
+	 
 </body>
 </html>

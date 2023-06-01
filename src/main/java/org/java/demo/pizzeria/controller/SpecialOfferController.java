@@ -45,9 +45,6 @@ public class SpecialOfferController {
 	public String store(@Valid @ModelAttribute SpecialOffer specialOffer,
 		BindingResult bindingResult, Model model) {
 		
-		System.err.println(specialOffer);
-		System.err.println(specialOffer.getPizza());
-		
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("specialOffer", specialOffer);
 			model.addAttribute("errors", bindingResult);
@@ -84,5 +81,6 @@ public class SpecialOfferController {
 		Integer pizzaId = specialOffer.getPizza().getId();
 		return "redirect:/pizzas/" + pizzaId;
 	}
+	
 	
 }

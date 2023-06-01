@@ -91,4 +91,9 @@ public class SpecialOffer {
 		return "[" +  getId() + "] " + getTitle()
 				+ "\nL'offerta inizia il: " + getStartDate() + " e termina " + getEndDate() + " - Pizza " + getPizza();
 	}
+	
+	public Integer getDiscount(Integer price) {
+		Integer discount = price * getDiscountPerc() / 100;
+		return price - discount;
+	}
 }
