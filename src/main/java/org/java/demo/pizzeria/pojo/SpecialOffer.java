@@ -92,8 +92,9 @@ public class SpecialOffer {
 				+ "\nL'offerta inizia il: " + getStartDate() + " e termina " + getEndDate() + " - Pizza " + getPizza();
 	}
 	
-	public Integer getDiscount(Integer price) {
-		Integer discount = price * getDiscountPerc() / 100;
-		return price - discount;
+		public String getDiscount(Integer price) {
+			Double discount = price *  getDiscountPerc() / 100d;
+			String finalPrice = String.format("%.2f€", price - discount);
+			return finalPrice;
 	}
 }

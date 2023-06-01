@@ -51,7 +51,7 @@
 									</p>
 									<small class="text-secondary d-block" th:each="offer : ${specialOffers}" th:object="${offer}">
 										<span>[[*{title} + ':']]</span>
-										<span class="fw-semibold"> [[${offer.getDiscount(pizza.price)} + ',00€']]</span>
+										<span class="fw-semibold"> [[${offer.getDiscount(pizza.price)}]]</span>
 									</small>
 								</div>
 							</div>
