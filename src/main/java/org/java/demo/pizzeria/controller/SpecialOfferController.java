@@ -54,8 +54,8 @@ public class SpecialOfferController {
 				return "create-so";
 		}
 		specialOfferService.save(specialOffer);
-		
-		return "redirect:/";
+		Integer pizzaId = specialOffer.getPizza().getId();
+		return "redirect:/pizzas/" + pizzaId;
 	}
 	
 	@GetMapping("/special-offers/edit/{id}")
@@ -81,7 +81,8 @@ public class SpecialOfferController {
 		}
 
 		specialOfferService.save(specialOffer);
-		return "redirect:/";
+		Integer pizzaId = specialOffer.getPizza().getId();
+		return "redirect:/pizzas/" + pizzaId;
 	}
 	
 }
