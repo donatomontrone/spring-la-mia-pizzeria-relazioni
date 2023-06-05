@@ -1,5 +1,6 @@
 package org.java.demo.pizzeria.pojo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.validator.constraints.URL;
@@ -9,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -45,13 +47,17 @@ public class Pizza {
 	@OneToMany(mappedBy = "pizza")
 	private List<SpecialOffer> specialOffers;
 	
+	@ManyToMany
+	private List<Ingredient> ingredients;
+	
 	public Pizza() {}
 
-	public Pizza(String name, String description, String imgPath, Integer price) {
+	public Pizza(String name, String description, String imgPath, Integer price, Ingredient... ingredients) {
 		setName(name);
 		setDescription(description);
 		setImgPath(imgPath);
 		setPrice(price);
+		setIngredients(ingredients);
 	}
 
 	public Integer getId() {
@@ -101,6 +107,28 @@ public class Pizza {
 	public void setSpecialOffers(List<SpecialOffer> specialOffers) {
 		this.specialOffers = specialOffers;
 	}
+	
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+	
+	//Con questa funzione possiamo passare un array e trasformarlo poi in una Collection di Ingredients
+	public void setIngredients(Ingredient[] ingredients) {
+
+		setIngredients(Arrays.asList(ingredients));
+	}
+	
+	public void addIngredient(Ingredient ingredient) {
+		getIngredients().add(ingredient);
+	}
+	
+	public void removeIngredient(Ingredient ingredient) {
+		getIngredients().remove(ingredient);
+	}
 
 	@Override
 	public String toString() {
@@ -108,8 +136,6 @@ public class Pizza {
 			+ "\nDescrizione: " + getDescription();
 	}
 	
-	
-	//Calcolo per la pizza scontata dentro l'offerta speciale.
 	
 	
 }

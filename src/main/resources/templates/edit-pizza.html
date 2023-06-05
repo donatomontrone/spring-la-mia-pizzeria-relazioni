@@ -62,6 +62,12 @@
 							[[ ${errors.getFieldError('price').getDefaultMessage()} ]]</div>
 					</div>
 				</div>
+				<div class="col-md-12">
+					<div th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+						<input th:id="${'ingredient-' + ingredient.id}" th:value="*{id}" th:checked="${pizza.ingredients.contains(ingredient)}" type="checkbox" name="ingredients">
+						<label th:for="${'ingredient-' + ingredient.id}">[[ *{name} ]]</label>
+					</div>
+				</div>
 				<div class="col-12">
 					<div class="d-flex justify-content-between">
 						<button type="submit" class="btn btn-outline-primary">

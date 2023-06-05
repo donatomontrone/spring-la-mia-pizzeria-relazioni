@@ -1,10 +1,13 @@
 package org.java.demo.pizzeria.pojo;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -21,9 +24,11 @@ public class Ingredient {
 	private String name;
 	
 	@Column(columnDefinition = "text")
-	@NotBlank(message="Inserisci la descrizione della pizza.")
 	@Size(min = 0, max = 65536, message="La descrizione dell'ingrediente è troppo lunga.")
 	private String description;
+	
+	@ManyToMany(mappedBy = "ingredients")
+	private List<Pizza> pizzas;
 	
 	
 	public Ingredient() {}
@@ -64,7 +69,16 @@ public class Ingredient {
 	public boolean  hasDescription() {
 		return getDescription() != null;
 	}
+
 	
+	public List<Pizza> getPizzas() {
+		return pizzas;
+	}
+
+	public void setPizzas(List<Pizza> pizzas) {
+		this.pizzas = pizzas;
+	}
+
 	@Override
 	public String toString() {
 		return "Ingrediente: " + getName() + (hasDescription() ? " - Descrizione: " + getDescription() : "");

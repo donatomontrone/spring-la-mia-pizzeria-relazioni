@@ -3,8 +3,10 @@ package org.java.demo.pizzeria.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.java.demo.pizzeria.pojo.Ingredient;
 import org.java.demo.pizzeria.pojo.Pizza;
 import org.java.demo.pizzeria.pojo.SpecialOffer;
+import org.java.demo.pizzeria.service.IngredientService;
 import org.java.demo.pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ import jakarta.validation.Valid;
 public class PizzaController {
 	@Autowired
 	private PizzaService pizzaService;
+	
+	@Autowired
+	private IngredientService ingredientService;
 	
 	@GetMapping("/")
 	public String index(Model model) {
@@ -56,8 +61,9 @@ public class PizzaController {
 	
 	@GetMapping("/pizzas/create")
 	public String create(Model model) {
-		
+		List<Ingredient> ingredients = ingredientService.findAll();
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("ingredients", ingredients);
 		return "create-pizza";
 	}
 	
@@ -81,7 +87,9 @@ public class PizzaController {
 		
 		Optional<Pizza> oPizza = pizzaService.findById(id);
 		Pizza pizza = oPizza.get();
+		List<Ingredient> ingredients = ingredientService.findAll();
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("ingredients", ingredients);
 		
 		return "edit-pizza";
 	}

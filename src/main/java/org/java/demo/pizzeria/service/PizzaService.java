@@ -41,6 +41,14 @@ public class PizzaService {
 	return oPizza;
 	}
 	
+	@Transactional
+	public Optional<Pizza> findByIdwithIngredients(Integer id) {
+	Optional<Pizza> oPizza = pizzaRepository.findById(id);
+	Hibernate.initialize(oPizza.get().getIngredients());
+	
+	return oPizza;
+	}
+	
 	
 	public void delete(Pizza pizza) {
 		pizzaRepository.delete(pizza);
