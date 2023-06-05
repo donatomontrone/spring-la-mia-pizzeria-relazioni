@@ -37,7 +37,7 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 			    new Pizza("Quattro Formaggi", "Pizza con pomodoro e una selezione di quattro formaggi", "https://www.pizzus.it/wp-content/uploads/2019/11/focus.png", 12),
 			    new Pizza("Wurstel", "Pizza con pomodoro, mozzarella e wurstel", "https://www.oipulpit.it/wp-content/uploads/2021/03/pizza-wurstel.jpg", 9),
 			    new Pizza("Hawaiian", "Pizza con pomodoro, mozzarella, prosciutto cotto e ananas", "https://media.istockphoto.com/id/503580316/photo/pizza-with-pineapple-and-ham-on-white-background.jpg?s=612x612&w=0&k=20&c=CArlgKntmtUpZENENw0plUmIo3jau3TjHKQ7gPXzfZc=", 10),
-			    new Pizza("Capricciosa", "Pizza con pomodoro, mozzarella, prosciutto cotto, funghi e olive", "https://www.origanoadomicilio.it/wp-content/uploads/2020/03/pizza-capricciosa.jpg", 11),
+			    new Pizza("Capricciosa", "Pizza con pomodoro, mozzarella, prosciutto cotto, funghi e olive", "https://italianspizza.it/wp-content/uploads/2022/06/FAMILY-PIZZA-CAPRICCIOSA-online-pizza-delivery-consegna-a-domicilio-aperti-7-giorni-su-7-eventi-mirandolo-terme-borghetto-lodigiano-lodi-milano-italia.png", 11),
 			    new Pizza("Diavola", "Pizza con pomodoro, mozzarella e salame piccante", "https://www.lapastadij-momo.it/wp-content/uploads/2020/09/diavola.jpg", 10),
 			    new Pizza("Vegetariana", "Pizza con pomodoro, mozzarella e una selezione di verdure", "https://italianspizza.it/wp-content/uploads/2022/06/FAMILY-PIZZA-VEGETARIANA-online-pizza-sconti-eventi-feste-delivery-consegna-a-domicilio-san-colombano-al-lambro-lambrinia-monteleone-lodi-milano-italia.png", 9)
 			);

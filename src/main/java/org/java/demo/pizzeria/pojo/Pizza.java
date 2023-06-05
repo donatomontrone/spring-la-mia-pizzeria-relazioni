@@ -29,7 +29,7 @@ public class Pizza {
 	
 	@Column(columnDefinition = "text")
 	@NotBlank(message="Inserisci la descrizione della pizza.")
-	@Size(min=3,message="La descrizione della pizza deve essere almeno di 3 caratteri.")
+	@Size(min=3, message="La descrizione della pizza deve essere almeno di 3 caratteri.")
 	private String description;
 	
 	@URL(message = "Inserisci un url per l'immagine della pizza valido.")

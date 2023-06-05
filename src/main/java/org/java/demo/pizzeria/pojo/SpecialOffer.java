@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.AssertTrue;
 
 @Entity
 public class SpecialOffer {
@@ -25,7 +25,6 @@ public class SpecialOffer {
 	@FutureOrPresent(message="La data deve essere ugual o seguente alla data odierna.")
 	private LocalDate startDate;
 	
-	@Future(message="La data deve essere seguente alla data odierna.")
 	private LocalDate endDate;
 	
 	@NotBlank(message="Inserisci il titolo dell'offerta speciale.")
@@ -48,6 +47,12 @@ public class SpecialOffer {
 		setDiscountPerc(discountPerc);
 		setPizza(pizza);
 	}
+	
+	@AssertTrue(message="La data deve essere seguente alla data d'inizio dell'offerta.")
+	private boolean FutureDate() {
+		return getStartDate().isBefore(getEndDate());
+	}
+	
 	public Integer getId() {
 		return id;
 	}
