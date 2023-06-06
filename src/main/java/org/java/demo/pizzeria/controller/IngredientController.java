@@ -50,12 +50,12 @@ public class IngredientController {
 		
 		
 		ingredientService.save(ingredient);
-		
-		for (Pizza pizza : ingredient.getPizzas()) {
+		if (ingredient.getPizzas() != null) {
+			for (Pizza pizza : ingredient.getPizzas()) {
 			pizza.addIngredient(ingredient);
 			pizzaService.save(pizza);
+			}
 		}
-		
 		return "redirect:/ingredients";
 	}
 	
@@ -71,7 +71,7 @@ public class IngredientController {
 		return "edit-ingredient";
 	}
 	
-	@PostMapping("/edit{id}")
+	@PostMapping("/edit/{id}")
 	public String update(@ModelAttribute Ingredient ingredient) {
 		
 		ingredientService.save(ingredient);
@@ -82,9 +82,11 @@ public class IngredientController {
 		
 		}
 		
-		for (Pizza pizza : ingredient.getPizzas()) {
+		if (ingredient.getPizzas() != null) {
+			for (Pizza pizza : ingredient.getPizzas()) {
 			pizza.addIngredient(ingredient);
 			pizzaService.save(pizza);
+			}
 		}
 		return "redirect:/ingredients";
 	}
