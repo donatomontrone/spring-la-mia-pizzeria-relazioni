@@ -48,13 +48,20 @@ public class IngredientController {
 	@PostMapping("/create")
 	public String store(@ModelAttribute Ingredient ingredient) {
 		
-		
+		System.err.println(ingredient);
+		System.err.println(ingredient.getPizzas());
 		ingredientService.save(ingredient);
-		if (ingredient.getPizzas() != null) {
-			for (Pizza pizza : ingredient.getPizzas()) {
-			pizza.addIngredient(ingredient);
-			pizzaService.save(pizza);
-			}
+//		if (ingredient.getPizzas() != null) {
+//			for (Pizza pizza : ingredient.getPizzas()) {
+//			pizza.addIngredient(ingredient);
+//			pizzaService.save(pizza);
+//			}
+//		}
+		for (Pizza p : ingredient.getPizzas()) {
+			
+			Pizza tmpP = pizzaService.findByIdwithIngredients(p.getId()).get();
+			tmpP.addIngredient(ingredient);
+			pizzaService.save(tmpP);
 		}
 		return "redirect:/ingredients";
 	}
