@@ -55,6 +55,11 @@
 									</small>
 								</div>
 							</div>
+							<div class ="col-12">
+								<div class ="card-body">
+									<p class="card-text" th:each="ing : ${ingredients}" th:object="${ing}">[[*{name}]]</p>
+								</div>
+							</div>
 							<div class="col-12">
 								<div class="card-footer text-center">
 									<span th:each="offer : ${specialOffers}" th:object="${offer}">

@@ -50,10 +50,12 @@ public class PizzaController {
 	public String show(Model model, 
 			@PathVariable("id") Integer id) {
 		
-		Optional<Pizza> oPizza = pizzaService.findByIdwithSpecialOffer(id);
+		Optional<Pizza> oPizza = pizzaService.findByIdwithIngredientsAndOffer(id);
 		Pizza pizza = oPizza.get();
 		List<SpecialOffer> specialOffers = pizza.getSpecialOffers();
+		List<Ingredient> ingredients = pizza.getIngredients();
 		
+		model.addAttribute("ingredients", ingredients);
 		model.addAttribute("specialOffers", specialOffers);
 		model.addAttribute("pizza", pizza);
 		return "pizza";
@@ -85,10 +87,10 @@ public class PizzaController {
 	public String edit(Model model, 
 			@PathVariable("id") Integer id) {
 		
-		Optional<Pizza> oPizza = pizzaService.findById(id);
-		Pizza pizza = oPizza.get();
+		Optional<Pizza> oPizza = pizzaService.findByIdwithIngredients(id);
+		Pizza pizzas = oPizza.get();
 		List<Ingredient> ingredients = ingredientService.findAll();
-		model.addAttribute("pizza", pizza);
+		model.addAttribute("pizzas", pizzas);
 		model.addAttribute("ingredients", ingredients);
 		
 		return "edit-pizza";

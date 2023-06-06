@@ -136,6 +136,19 @@ public class Pizza {
 			+ "\nDescrizione: " + getDescription();
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+
+		if (!(obj instanceof Pizza)) return false;
+
+		Pizza pizzaObject = (Pizza) obj;
+
+		return getId() == pizzaObject.getId();
+	}
+	@Override
+	public int hashCode() {
+
+		return getId();
+	}
 	
 }

@@ -48,32 +48,25 @@ public class IngredientController {
 	@PostMapping("/create")
 	public String store(@ModelAttribute Ingredient ingredient) {
 		
-		System.err.println(ingredient);
-		System.err.println(ingredient.getPizzas());
-		ingredientService.save(ingredient);
-//		if (ingredient.getPizzas() != null) {
-//			for (Pizza pizza : ingredient.getPizzas()) {
-//			pizza.addIngredient(ingredient);
-//			pizzaService.save(pizza);
-//			}
-//		}
-		for (Pizza p : ingredient.getPizzas()) {
+		if (ingredient.getPizzas() != null) {
+			for (Pizza p : ingredient.getPizzas()) {
+				Pizza tmpP = pizzaService.findByIdwithIngredients(p.getId()).get();
+				tmpP.addIngredient(ingredient);
+				pizzaService.save(tmpP);
+			}
 			
-			Pizza tmpP = pizzaService.findByIdwithIngredients(p.getId()).get();
-			tmpP.addIngredient(ingredient);
-			pizzaService.save(tmpP);
 		}
 		return "redirect:/ingredients";
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String edit(Model model, @PathVariable Integer id) {
-		List<Pizza> pizzas = pizzaService.findAll();
-		Optional<Ingredient> optIngredient = ingredientService.findById(id);
+		Optional<Ingredient> optIngredient = ingredientService.findByIdwithPizzas(id);
 		Ingredient ingredient = optIngredient.get();
+		List<Pizza> pizzas = pizzaService.findAll();
 		
-		model.addAttribute("ingredient", ingredient);
 		model.addAttribute("pizzas", pizzas);
+		model.addAttribute("ingredient", ingredient);
 		
 		return "edit-ingredient";
 	}
@@ -90,9 +83,10 @@ public class IngredientController {
 		}
 		
 		if (ingredient.getPizzas() != null) {
-			for (Pizza pizza : ingredient.getPizzas()) {
-			pizza.addIngredient(ingredient);
-			pizzaService.save(pizza);
+			for (Pizza p : ingredient.getPizzas()) {
+				Pizza tmpP = pizzaService.findByIdwithIngredients(p.getId()).get();
+				tmpP.addIngredient(ingredient);
+				pizzaService.save(tmpP);
 			}
 		}
 		return "redirect:/ingredients";
