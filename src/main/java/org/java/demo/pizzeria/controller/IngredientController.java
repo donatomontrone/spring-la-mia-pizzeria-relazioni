@@ -93,7 +93,12 @@ public class IngredientController {
 	public String delete(@PathVariable("id") Integer id) {
 		Optional<Ingredient> optIngredient = ingredientService.findById(id);
 		Ingredient ingredient = optIngredient.get();
+		
+		for (Pizza pizza : ingredient.getPizzas()) {
+			pizza.removeIngredient(ingredient);
+			pizzaService.save(pizza);
+		}
 		ingredientService.delete(ingredient);
-		return "redirect:/ingredient";
+		return "redirect:/ingredients";
 	}
 }
